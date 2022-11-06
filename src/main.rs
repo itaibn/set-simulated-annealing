@@ -227,7 +227,7 @@ fn main() {
     let mut beta: f64 = 0.0;
     let mut log_z: f64 = PARTITION_SIZE as f64 * f64::ln(NUM_LINES as f64);
     // Account for reordering ambiguity
-    for n in 1 .. PARTITION_SIZE {
+    for n in 1 ..= PARTITION_SIZE {
         log_z -= f64::ln(n as f64);
     }
     let mut partition: Partition = rng.gen();
@@ -236,7 +236,7 @@ fn main() {
             partition.step(&mut rng, beta);
         beta += DEL_BETA;
         log_z -= DEL_BETA * partition.cost as f64;
-        if i % 10 == 0 {
+        if i % 100 == 0 {
             println!("Iter {}: beta {} cost {} log_z {}", i, beta,
                 partition.cost, log_z);
         }

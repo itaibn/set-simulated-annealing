@@ -226,6 +226,10 @@ fn main() {
     let mut rng = thread_rng();
     let mut beta: f64 = 0.0;
     let mut log_z: f64 = PARTITION_SIZE as f64 * f64::ln(NUM_LINES as f64);
+    // Account for reordering ambiguity
+    for n in 1 .. PARTITION_SIZE {
+        log_z -= f64::ln(n as f64);
+    }
     let mut partition: Partition = rng.gen();
     for i in 0..ITER {
         /*let del_cost = */
